@@ -20,7 +20,7 @@ public class MainController {
 	}
 	
 	@GetMapping(path = "username/{name}")
-	public MessageBean username(@PathVariable String name) {
-		return new MessageBean(String.format("Hello World %s", name));
+	public MessageBean username(@PathVariable String sname) {
+		return new MessageBean(String.format("Hello World %s", sname));
 	}
 }
