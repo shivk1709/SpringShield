@@ -28,13 +28,14 @@ public class UserController {
 		return this.userService.saveUser(userData);
 	}
 	
+	@GetMapping(path = "/findById/{id}")
 	public UserDto findUserById(int id) {	
+		return this.userService.findById(id);
 	}
 	
 	
 	@DeleteMapping(path = "/deleteById/{id}")
 	public void deleteUserById(int id) {
 		this.userService.deleteById(id);
-		System.out.println("Data deleted Successfully");
 	}
 }

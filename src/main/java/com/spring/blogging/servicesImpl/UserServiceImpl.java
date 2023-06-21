@@ -3,6 +3,7 @@ package com.spring.blogging.servicesImpl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -44,17 +45,19 @@ public class UserServiceImpl implements UserService {
 				.findFirst().get();
 	}
 
-	@Override
-	public void deleteById(int id) {
-		// TODO Auto-generated method stub
-		UserDto userData = this.userDto.stream().filter(user -> user.getId().equals(id)).findFirst().get();
-		this.userDto.remove(userData);
-	}
 
 	@Override
 	public UserDto updateUser(UserDto userData, int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void deleteById(int id) {
+		// TODO Auto-generated method stub
+//		Optional<UserDto> userData = this.userDto.stream().filter(user -> user.getId().equals(id)).findFirst().get();
+//		System.out.println(userData.get());
+		
 	}
 
 }
