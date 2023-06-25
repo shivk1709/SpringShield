@@ -1,22 +1,23 @@
 package com.spring.blogging.dtos;
 
-import java.time.LocalDate;
 
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Setter
-@Getter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @ToString
-public class UserDto {
+public class CategoryDto {
 	
 	private Integer id;
 	private String name;
-	private LocalDate age;
-	
+	private String description;
+	private Date insertDate;
+
 }

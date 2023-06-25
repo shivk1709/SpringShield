@@ -9,7 +9,7 @@ public interface UserService {
 	public List<UserDto> getAllUsers();
 	public UserDto saveUser(UserDto userData);
 	public UserDto findById(int id);
-	public void deleteById(int id);
+	public String deleteById(int id);
 	public UserDto updateUser(UserDto userData, int id);
 
 }
