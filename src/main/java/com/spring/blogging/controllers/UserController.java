@@ -2,6 +2,8 @@ package com.spring.blogging.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +31,8 @@ public class UserController {
 		return new ResponseEntity<List<UserDto>>(this.userService.getAllUsers(), HttpStatus.FOUND);
 	}
 
-	@PostMapping(path = "/save")
-	public ResponseEntity <UserDto> saveUser(@RequestBody UserDto userData) {
+	@PostMapping(path = "/create")
+	public ResponseEntity <UserDto> saveUser(@Valid @RequestBody UserDto userData) {
 		UserDto user = this.userService.saveUser(userData);
 		return new ResponseEntity <UserDto>(user, HttpStatus.CREATED);
 	}
@@ -41,15 +43,14 @@ public class UserController {
 		return new ResponseEntity<UserDto>(userDto, HttpStatus.FOUND);
 	}
 	
-	
-	@DeleteMapping(path = "/deleteById/{id}")
+	@DeleteMapping(path = "/delete/{id}")
 	public ResponseEntity<String> deleteUserById(@PathVariable int id) {
 		String response = this.userService.deleteById(id);
 		return new ResponseEntity<String>(response, HttpStatus.OK);
 	}
 	
 	@PutMapping(path = "/update/{id}")
-	public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto, @PathVariable int id){
+	public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @PathVariable int id){
 		UserDto updatedUser = this.userService.updateUser(userDto, id);
 		return new ResponseEntity<UserDto>(updatedUser, HttpStatus.ACCEPTED);
 	}

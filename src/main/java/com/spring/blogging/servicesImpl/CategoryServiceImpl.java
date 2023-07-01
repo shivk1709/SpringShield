@@ -46,8 +46,8 @@ public class CategoryServiceImpl implements CategoryService{
 	public CategoryDto updateCategory(CategoryDto categoryDto, int id) {
 		// TODO Auto-generated method stub
 		Category category = this.categoryDao.findById(id).orElseThrow(()-> new ResourceNotFoundException("Category not Exist ", "with id ",Long.valueOf(id)));
-		category.setName(categoryDto.getName());
-		category.setDescription(categoryDto.getDescription());
+		category.setCategoryName(categoryDto.getCategoryName());
+		category.setCategoryDescription(categoryDto.getCategoryDescription());
 		return this.modelMapper.map(this.categoryDao.save(category), CategoryDto.class);
 	}
 
