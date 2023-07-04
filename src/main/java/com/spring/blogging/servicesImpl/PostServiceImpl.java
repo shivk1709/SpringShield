@@ -16,6 +16,9 @@ import com.spring.blogging.dtos.PostDto;
 import com.spring.blogging.exceptions.ResourceNotFoundException;
 import com.spring.blogging.services.PostService;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -33,9 +36,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public PostDto createPost(PostDto postDto, int categoryId, int userId) {
-		
 		// TODO Auto-generated method stub
-		
 		Category category = this.categoryDao.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Category", "Not Exist For Id", Long.valueOf(categoryId)));
 		User user = this.userDao.findById(userId).orElseThrow(()-> new ResourceNotFoundException("User", "Not Exist for Id", Long.valueOf(userId)));
 		
@@ -50,13 +51,15 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public PostDto findPostById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		Post postById = this.postDao.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post not Exist", " for the given Id: ", Long.valueOf(id)));
+		return this.modelMapper.map(postById,PostDto.class);
 	}
 
 	@Override
-	public PostDto findAllPosts() {
+	public List<PostDto> findAllPosts() {
 		// TODO Auto-generated method stub
-		return null;
+		List<Post> listOfallPost = this.postDao.findAll();
+		return listOfallPost.stream().map(post -> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
 	}
 
 	@Override
@@ -66,9 +69,25 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public void deletePostById(int id) {
+	public String deletePostById(int id) {
 		// TODO Auto-generated method stub
+		this.postDao.deleteById(id);
+		return "Post Deleted Successfully";
 		
+	}
+
+	@Override
+	public List<PostDto> getPostsByCategoryId(int categoryId) {
+		Category category = this.categoryDao.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Category Not Exist", "with the Id", Long.valueOf(categoryId)));
+		List<Post> postsByCategory = this.postDao.findByCategory(category);
+		return postsByCategory.stream().map(post  -> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<PostDto> getPostsByUserId(int userId) {
+		User user = this.userDao.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not Exist", "for Id :", Long.valueOf(userId)));
+		List<Post> allPostsByUserId = this.postDao.findByUser(user);
+		return allPostsByUserId.stream().map(post -> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
 	}
 
 }

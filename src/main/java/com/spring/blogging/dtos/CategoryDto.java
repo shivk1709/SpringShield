@@ -2,11 +2,14 @@ package com.spring.blogging.dtos;
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.spring.blogging.beans.Post;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,6 +36,9 @@ public class CategoryDto {
 	
 	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date insertDate;
+	
+	private Set<Post> posts = new HashSet<>();
+
 	
 
 }

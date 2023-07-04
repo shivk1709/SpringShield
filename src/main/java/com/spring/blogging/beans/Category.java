@@ -2,7 +2,9 @@ package com.spring.blogging.beans;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,16 +16,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "category")
 public class Category {
 	
@@ -42,8 +41,8 @@ public class Category {
 	@Column(name = "created_date")
 	private Date insertDate;
 	
-	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private List<Post> posts = new ArrayList<>();
+	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+	private Set<Post> posts = new HashSet<>();
 	
 
 }
