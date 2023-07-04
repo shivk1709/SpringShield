@@ -2,6 +2,15 @@ package com.spring.blogging.dtos;
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.spring.blogging.beans.Post;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,8 +25,20 @@ import lombok.ToString;
 public class CategoryDto {
 	
 	private Integer id;
-	private String name;
-	private String description;
+	
+	@NotEmpty
+	@Size(max = 12, message = "Username too long")
+	private String categoryName;
+	
+	@NotEmpty
+	@Size(min = 5, message = "Please give brief description")
+	private String categoryDescription;
+	
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date insertDate;
+	
+	private Set<Post> posts = new HashSet<>();
+
+	
 
 }
