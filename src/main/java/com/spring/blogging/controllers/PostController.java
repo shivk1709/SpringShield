@@ -54,5 +54,11 @@ public class PostController {
 		String deleteMessage = this.postService.deletePostById(postId);
 		return new ResponseEntity<String>(deleteMessage, HttpStatus.OK);
 	}
+	
+	@PutMapping("/update-post/{postId}")
+	public ResponseEntity<PostDto> updatePostUsingPostId(@Valid @RequestBody PostDto postDto, @PathVariable int postId){
+		PostDto updatedPost = this.postService.updatePostById(postDto, postId);
+		return new ResponseEntity<PostDto>(updatedPost, HttpStatus.OK);
+	}
 
 }
