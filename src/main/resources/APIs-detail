@@ -1,0 +1,25 @@
+Category APIs -
+
+POST http://localhost:9090/category/save
+GET http://localhost:9090/category/get/2
+GET http://localhost:9090/category/all
+PUT http://localhost:9090/category/update/1
+DELETE http://localhost:9090/category/delete/3
+
+User APIs
+
+POST http://localhost:9090/user/create
+GET http://localhost:9090/user/getAll
+PUT http://localhost:9090/user/update/7
+GET http://localhost:9090/user/getUser/4
+DELETE http://localhost:9090/user/delete/3
+
+Post APIs
+
+POST http://localhost:9090/post/create/categoryId/3/userId/3
+GET http://localhost:9090/post/byCategoryId/1
+GET http://localhost:9090/post/byUserId/3
+GET http://localhost:9090/post/byPostId/9
+GET http://localhost:9090/post/allPosts
+PUT http://localhost:9090/post/update-post/9
+DELETE http://localhost:9090/post/deleteByPostId/62

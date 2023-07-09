@@ -63,15 +63,19 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public PostDto updatePostById(PostDto postDto, int id) {
+	public PostDto updatePostById(PostDto postDto, int postId) {
 		// TODO Auto-generated method stub
-		return null;
+		Post postfindByGivenId = this.postDao.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post not there", "for the given id", Long.valueOf(postId)));
+		postfindByGivenId.setAbout(postDto.getAbout());
+		postfindByGivenId.setTitle(postDto.getTitle());		
+		postDao.save(postfindByGivenId);
+		return this.modelMapper.map(postfindByGivenId, PostDto.class);
 	}
 
 	@Override
-	public String deletePostById(int id) {
+	public String deletePostById(int postId) {
 		// TODO Auto-generated method stub
-		this.postDao.deleteById(id);
+		this.postDao.deleteById(postId);
 		return "Post Deleted Successfully";
 		
 	}

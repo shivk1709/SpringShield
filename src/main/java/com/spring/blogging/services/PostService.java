@@ -6,9 +6,9 @@ import java.util.List;
 public interface PostService {
 	
 	public PostDto createPost(PostDto postDto, int categoryId, int userId);
-	public PostDto findPostById(int id);
+	public PostDto findPostById(int postId);
 	public List<PostDto> findAllPosts();
-	public PostDto updatePostById(PostDto postDto, int id);
+	public PostDto updatePostById(PostDto postDto, int psotId);
 	public String deletePostById(int id);
 
 	public List<PostDto> getPostsByCategoryId(int categoryId);
