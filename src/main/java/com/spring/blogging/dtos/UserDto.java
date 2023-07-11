@@ -41,6 +41,5 @@ public class UserDto {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate age;
 	
-	private Set<Post> postSet = new HashSet<>();
 		
 }
