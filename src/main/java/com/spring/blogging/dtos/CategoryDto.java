@@ -37,8 +37,6 @@ public class CategoryDto {
 	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date insertDate;
 	
-	private Set<Post> posts = new HashSet<>();
-
 	
 
 }
