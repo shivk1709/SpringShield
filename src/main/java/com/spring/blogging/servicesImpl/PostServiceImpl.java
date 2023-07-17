@@ -35,10 +35,10 @@ public class PostServiceImpl implements PostService {
 	Logger logger = LoggerFactory.getLogger(PostServiceImpl.class);
 
 	@Override
-	public PostDto createPost(PostDto postDto, int categoryId, int userId) {
+	public PostDto createPost(PostDto postDto, int categoryId, String name) {
 		// TODO Auto-generated method stub
 		Category category = this.categoryDao.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Category", "Not Exist For Id", Long.valueOf(categoryId)));
-		User user = this.userDao.findById(userId).orElseThrow(()-> new ResourceNotFoundException("User", "Not Exist for Id", Long.valueOf(userId)));
+		User user = this.userDao.findByUsername(name);
 		
 		Post post = this.modelMapper.map(postDto, Post.class);
 		post.setCategory(category);
@@ -88,8 +88,8 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<PostDto> getPostsByUserId(int userId) {
-		User user = this.userDao.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not Exist", "for Id :", Long.valueOf(userId)));
+	public List<PostDto> getPostsByUserId(String name) {
+		User user = this.userDao.findByUsername(name);
 		List<Post> allPostsByUserId = this.postDao.findByUser(user);
 		return allPostsByUserId.stream().map(post -> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
 	}

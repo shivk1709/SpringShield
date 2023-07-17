@@ -37,21 +37,21 @@ public class UserController {
 		return new ResponseEntity <UserDto>(user, HttpStatus.CREATED);
 	}
 	
-	@GetMapping(path = "/findById/{id}")
-	public ResponseEntity<UserDto> findUserById(@PathVariable int id) {	
-		UserDto userDto = this.userService.findById(id);
+	@GetMapping(path = "/findById/{name}")
+	public ResponseEntity<UserDto> findUserById(@PathVariable String name) {	
+		UserDto userDto = this.userService.findById(name);
 		return new ResponseEntity<UserDto>(userDto, HttpStatus.FOUND);
 	}
 	
-	@DeleteMapping(path = "/delete/{id}")
-	public ResponseEntity<String> deleteUserById(@PathVariable int id) {
-		String response = this.userService.deleteById(id);
+	@DeleteMapping(path = "/delete/{name}")
+	public ResponseEntity<String> deleteUserById(@PathVariable String name) {
+		String response = this.userService.deleteById(name);
 		return new ResponseEntity<String>(response, HttpStatus.OK);
 	}
 	
-	@PutMapping(path = "/update/{id}")
-	public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @PathVariable int id){
-		UserDto updatedUser = this.userService.updateUser(userDto, id);
+	@PutMapping(path = "/update/{name}")
+	public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @PathVariable String name){
+		UserDto updatedUser = this.userService.updateUser(userDto, name);
 		return new ResponseEntity<UserDto>(updatedUser, HttpStatus.ACCEPTED);
 	}
 }

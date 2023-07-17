@@ -27,16 +27,18 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class UserDto {
-	
-	private Integer id;
-	
+		
 	@NotEmpty
 	@Size(max = 10, message = "Username too long")
-	private String name;
+	private String username;
 	
 	@NotEmpty
 	@Email(message = "Please enter the valid email !!")
 	private String email;
+	
+	private String password;
+	
+	private String role;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate age;

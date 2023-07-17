@@ -1,6 +1,7 @@
 package com.spring.blogging.beans;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,16 +26,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "user")
-public class User {
+public class User{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	
-	@Column(name = "username")
-	private String name;
+	private String username;
 	
 	private String email;
+	
+	private String password;
+	
+	private String role;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "DOB")
@@ -38,5 +43,6 @@ public class User {
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)	
 	private List<Post> posts;
+
 
 }

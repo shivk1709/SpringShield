@@ -19,9 +19,9 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 	
-	@PostMapping(path = "/create/categoryId/{categoryId}/userId/{userId}")
-	public ResponseEntity<PostDto> createPostUsingCategoryandUser(@Valid @RequestBody PostDto postDto,@PathVariable int categoryId,@PathVariable int userId){
-		PostDto createdPost = this.postService.createPost(postDto, categoryId, userId);
+	@PostMapping(path = "/create/categoryId/{categoryId}/userId/{name}")
+	public ResponseEntity<PostDto> createPostUsingCategoryandUser(@Valid @RequestBody PostDto postDto,@PathVariable int categoryId,@PathVariable String name){
+		PostDto createdPost = this.postService.createPost(postDto, categoryId, name);
 		return new ResponseEntity<PostDto>(createdPost, HttpStatus.CREATED);
 	}
 
@@ -31,9 +31,9 @@ public class PostController {
 		return new ResponseEntity<List<PostDto>>(allPostByCategoryId, HttpStatus.OK);
 	}
 	
-	@GetMapping(path = "/byUserId/{userId}")
-	public ResponseEntity<List<PostDto>> getAllPostsByUserId(@PathVariable int userId){
-		List<PostDto> posts = this.postService.getPostsByUserId(userId);
+	@GetMapping(path = "/byUserId/{name}")
+	public ResponseEntity<List<PostDto>> getAllPostsByUserId(@PathVariable String name){
+		List<PostDto> posts = this.postService.getPostsByUserId(name);
 		return new ResponseEntity<List<PostDto>>(posts, HttpStatus.FOUND);
 	}
 	

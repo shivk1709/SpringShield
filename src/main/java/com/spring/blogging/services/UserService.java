@@ -8,8 +8,8 @@ public interface UserService {
 	
 	public List<UserDto> getAllUsers();
 	public UserDto saveUser(UserDto userData);
-	public UserDto findById(int id);
-	public String deleteById(int id);
-	public UserDto updateUser(UserDto userData, int id);
+	public UserDto findById(String id);
+	public String deleteById(String id);
+	public UserDto updateUser(UserDto userData, String id);
 
 }

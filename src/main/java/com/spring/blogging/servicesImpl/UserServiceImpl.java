@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.spring.blogging.beans.User;
 import com.spring.blogging.daos.UserDao;
@@ -16,8 +18,13 @@ public class UserServiceImpl implements UserService {
 		
 	@Autowired
 	private UserDao userDao;
+	
 	@Autowired
 	private ModelMapper modelmapper;
+	
+	@Autowired    
+	private PasswordEncoder passwordEncoder;
+	
 	
 	@Override
 	public List<UserDto> getAllUsers() {
@@ -30,22 +37,23 @@ public class UserServiceImpl implements UserService {
 	public UserDto saveUser(UserDto userData) {
 		// TODO Auto-generated method stub
 		User user = this.modelmapper.map(userData, User.class);
+		user.setRole("ROLE_"+user.getRole().toUpperCase());
+		user.setPassword(this.passwordEncoder.encode(user.getPassword()));
 		return this.modelmapper.map(this.userDao.save(user), UserDto.class);
 	}
 
 	@Override
-	public UserDto findById(int id) {
+	public UserDto findById(String name) {
 		// TODO Auto-generated method stub
-		User user =  this.userDao.findById(id).orElseThrow(()-> new ResourceNotFoundException("User", " Id ", Long.valueOf(id)));
+		User user =  this.userDao.findByUsername(name);
 		return this.modelmapper.map(user, UserDto.class); 
 	}
 	
 	@Override
-	public UserDto updateUser(UserDto userData, int id) {
+	public UserDto updateUser(UserDto userData, String name) {
 		// TODO Auto-generated method stub
-		User user = this.userDao.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", " Not found having Id ", Long.valueOf(id)));
-		user.setName(userData.getName());
-		user.setAge(userData.getAge());
+		User user = this.userDao.findByUsername(name);
+		user.setUsername(userData.getUsername());
 		user.setEmail(userData.getEmail());
 		User updatedUser = this.userDao.save(user);
 		UserDto converUserBeantToUserDto = this.modelmapper.map(updatedUser, UserDto.class);
@@ -53,9 +61,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String deleteById(int id) {
+	public String deleteById(String name) {
 		// TODO Auto-generated method stub
-		this.userDao.deleteById(id);
+		this.userDao.deleteByUsername(name);
 		return "Deleted Successfully";
 	}
 

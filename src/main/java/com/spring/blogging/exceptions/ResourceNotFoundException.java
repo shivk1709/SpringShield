@@ -11,6 +11,7 @@ public class ResourceNotFoundException extends RuntimeException {
 	private String resourceName;
 	private String columnName;
 	private Long value;
+	private String name;
 	
 	public ResourceNotFoundException(String resourceName, String columnName, Long value) {
 		super(String.format("%s not found with %s : %s", resourceName, columnName, value));
@@ -18,4 +19,6 @@ public class ResourceNotFoundException extends RuntimeException {
 		this.columnName = columnName;
 		this.value = value;
 	}
+	
+
 }

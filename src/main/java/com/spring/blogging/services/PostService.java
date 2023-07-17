@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface PostService {
 	
-	public PostDto createPost(PostDto postDto, int categoryId, int userId);
+	public PostDto createPost(PostDto postDto, int categoryId, String name);
 	public PostDto findPostById(int postId);
 	public List<PostDto> findAllPosts();
 	public PostDto updatePostById(PostDto postDto, int psotId);
@@ -13,6 +13,6 @@ public interface PostService {
 
 	public List<PostDto> getPostsByCategoryId(int categoryId);
 
-	public List<PostDto> getPostsByUserId(int userId);
+	public List<PostDto> getPostsByUserId(String name);
 
 }
